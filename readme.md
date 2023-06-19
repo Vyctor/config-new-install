@@ -103,6 +103,17 @@ count = !git shortlog -s --grep
 
 ```
 
+# Clone all repos
+
+```bash
+CNTX={users}; NAME={vyctor}; PAGE=1
+curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
+  grep -e 'ssh_url*' |
+  cut -d \" -f 4 |
+  xargs -L1 git clone
+```
+
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
