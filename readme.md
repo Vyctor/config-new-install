@@ -10,23 +10,15 @@
 Configuration of path variables and git for a fresh install of OS.
 
 # .zshrc
-
-```
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export AWS_PROFILE=alliedlogistica
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"   
-export CARGO_HOME=$HOME/.cargo
-export PATH="$PATH:$CARGO_HOME/bin"
-export ZSH="$HOME/.oh-my-zsh"
- 
-#ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_THEME="dracula-pro"
 
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
@@ -42,7 +34,8 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zplugin ice depth=1; 
+zplugin light romkatv/powerlevel10k
 zinit light-mode for \
     zdharma-continuum/zinit-annex-as-monitor \
     zdharma-continuum/zinit-annex-bin-gem-node \
@@ -52,7 +45,6 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-completions
-zinit light buonomo/yarn-completion
 
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
@@ -65,6 +57,9 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
+export CARGO_HOME=$HOME/.cargo
+export PATH="$PATH:$CARGO_HOME/bin"
+
 alias cat="bat --style=numbers,changes,grid --paging=always"
 alias ls="exa --icons --group-directories-first --git --color=always"
 alias top="ytop" 
@@ -72,35 +67,17 @@ alias alliedlogistica="export AWS_PROFILE=alliedlogistica"
 alias alliedhomologa="export AWS_PROFILE=alliedhomologa"
 alias aws-vyctor="export AWS_PROFILE=alliedvyctor"
 alias see-git-remote="git remote -v | awk '{print $2}' | uniq"
+alias senhaaws="cat $HOME/allied/@passwords/aws.md"
+alias senharede="cat $HOME/allied/@passwords/rede.md"
 
 unsetopt PROMPT_SP
-```
 
-# Git config
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-```
-1. Setar o VSCode como editor global
-   1. git config --global core.editor code --edit
-2. Editar as configurações
-   1. git config --global --edit
-
-# Configurações
-[user]
-	name = Vyctor
-	email = dev.vyctor@gmail.com
-
-[core]
-	editor = code --wait
-
-[push]
-	followTags = true
-[alias]
-c = !git add --all && git commit -m
-s = !git status -s
-l = !git log  --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
-amend = !git add --all && git commit --amend --no-edit
-count = !git shortlog -s --grep
-
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 ```
 
 # Clone all repos
