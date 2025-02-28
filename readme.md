@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://www.linkedin.com/in/vyctorguimaraes/" target="_blank" rel="noopener noreferrer">
+ <a href="https://www.linkedin.com/in/vyctorguimaraes/" target="_blank" rel="noopener noreferrer">
     <img alt="Made by" src="https://img.shields.io/badge/made%20by-vyctor%20guimarães-%23FF9000">
   </a>
  <img alt="GitHub" src="https://img.shields.io/github/license/EliasGcf/gobarber?color=%23FF9000">
@@ -12,17 +12,23 @@ Configuration of path variables and git for a fresh install of OS.
 # .zshrc
 
 ```
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+export CARGO_HOME=$HOME/.cargo
+export PATH="$PATH:$CARGO_HOME/bin"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias cat="bat --style=numbers,changes,grid --paging=always"
+alias ls="exa --icons --group-directories-first --git --color=always"
+alias top="ytop" 
+
+ZSH_THEME="spaceship"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
+
+
 
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -36,8 +42,7 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-zplugin ice depth=1; 
-zplugin light romkatv/powerlevel10k
+
 zinit light-mode for \
     zdharma-continuum/zinit-annex-as-monitor \
     zdharma-continuum/zinit-annex-bin-gem-node \
@@ -56,33 +61,79 @@ pasteinit() {
 pastefinish() {
   zle -N self-insert $OLD_SELF_INSERT
 }
+
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
-export CARGO_HOME=$HOME/.cargo
-export PATH="$PATH:$CARGO_HOME/bin"
 
-alias cat="bat --style=numbers,changes,grid --paging=always"
-alias ls="exa --icons --group-directories-first --git --color=always"
-alias top="ytop" 
-alias alliedlogistica="export AWS_PROFILE=alliedlogistica"
-alias alliedhomologa="export AWS_PROFILE=alliedhomologa"
-alias aws-vyctor="export AWS_PROFILE=alliedvyctor"
-alias see-git-remote="git remote -v | awk '{print $2}' | uniq"
-alias senhaaws="cat $HOME/allied/@passwords/aws.md"
-alias senharede="cat $HOME/allied/@passwords/rede.md"
-
-unsetopt PROMPT_SP
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+SPACESHIP_PROMPT_ORDER=(
+  time           # Time stamps section
+  user           # Username section
+  dir            # Current directory section
+  host           # Hostname section
+  git            # Git section (git_branch + git_status)
+  hg             # Mercurial section (hg_branch  + hg_status)
+  package        # Package version
+  node           # Node.js section
+  bun            # Bun section
+  deno           # Deno section
+  ruby           # Ruby section
+  python         # Python section
+  elm            # Elm section
+  elixir         # Elixir section
+  xcode          # Xcode section
+  swift          # Swift section
+  golang         # Go section
+  perl           # Perl section
+  php            # PHP section
+  rust           # Rust section
+  haskell        # Haskell Stack section
+  scala          # Scala section
+  kotlin         # Kotlin section
+  java           # Java section
+  lua            # Lua section
+  dart           # Dart section
+  julia          # Julia section
+  crystal        # Crystal section
+  docker         # Docker section
+  docker_compose # Docker section
+  aws            # Amazon Web Services section
+  gcloud         # Google Cloud Platform section
+  azure          # Azure section
+  venv           # virtualenv section
+  conda          # conda virtualenv section
+  uv             # uv section
+  dotnet         # .NET section
+  ocaml          # OCaml section
+  vlang          # V section
+  zig            # Zig section
+  purescript     # PureScript section
+  erlang         # Erlang section
+  gleam          # Gleam section
+  kubectl        # Kubectl context section
+  ansible        # Ansible section
+  terraform      # Terraform workspace section
+  pulumi         # Pulumi stack section
+  ibmcloud       # IBM Cloud section
+  nix_shell      # Nix shell
+  gnu_screen     # GNU Screen section
+  exec_time      # Execution time
+  async          # Async jobs indicator
+  line_sep       # Line break
+  battery        # Battery level and status
+  jobs           # Background jobs indicator
+  exit_code      # Exit code section
+  sudo           # Sudo indicator
+  char           # Prompt character
+)
+SPACESHIP_USER_SHOW=always
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SYMBOL="❯"
+SPACESHIP_CHAR_SUFFIX=" "
 ```
 
 # Git config
+
 ```
 1. Setar o VSCode como editor global
    1. git config --global core.editor code --edit
@@ -90,12 +141,12 @@ export NVM_DIR="$HOME/.nvm"
    1. git config --global --edit
 # Configurações
 [user]
-	name = Vyctor
-	email = dev.vyctor@gmail.com
+ name = Vyctor
+ email = dev.vyctor@gmail.com
 [core]
-	editor = code --wait
+ editor = code --wait
 [push]
-	followTags = true
+ followTags = true
 [alias]
 c = !git add --all && git commit -m
 s = !git status -s
@@ -113,7 +164,6 @@ curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
   cut -d \" -f 4 |
   xargs -L1 git clone
 ```
-
 
 ## 📝 License
 
