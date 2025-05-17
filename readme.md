@@ -13,21 +13,28 @@ Configuration of path variables and git for a fresh install of OS.
 
 ```
 export ZSH="$HOME/.oh-my-zsh"
-export CARGO_HOME=$HOME/.cargo
-export PATH="$PATH:$CARGO_HOME/bin"
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-alias cat="bat --style=numbers,changes,grid --paging=always"
-alias ls="exa --icons --group-directories-first --git --color=always"
-alias top="ytop" 
 
 ZSH_THEME="spaceship"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
+
+export CARGO_HOME=$HOME/.cargo
+export PATH="$PATH:$CARGO_HOME/bin"
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+
+
+alias cat="bat --style=numbers,changes,grid --paging=always"
+alias ls="exa --icons --group-directories-first --git --color=always"
+alias top="btm" 
+alias python="python3"
+alias pip="pip3"
+alias code="cursor"
 
 
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -128,8 +135,17 @@ SPACESHIP_PROMPT_ORDER=(
 )
 SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_PROMPT_SEPARATE_LINE=false
+SPACESHIP_PROMPT_ASYNC=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
+# fnm
+FNM_PATH="/Users/vvguimaraes/Library/Application Support/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/Users/vvguimaraes/Library/Application Support/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
 ```
 
 # Git config
