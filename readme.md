@@ -31,7 +31,7 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 
 alias cat="bat --style=numbers,changes,grid --paging=always"
 alias ls="exa --icons --group-directories-first --git --color=always"
-alias top="btm" 
+alias top="btm"
 alias python="python3"
 alias pip="pip3"
 alias code="cursor"
@@ -62,7 +62,7 @@ zinit light zsh-users/zsh-completions
 
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic  
+  zle -N self-insert url-quote-magic
 }
 
 pastefinish() {
@@ -179,6 +179,156 @@ curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
   grep -e 'ssh_url*' |
   cut -d \" -f 4 |
   xargs -L1 git clone
+```
+
+# VSCODE SETTINGS
+
+```json
+{
+  // Workbench & Window (Aparência geral e comportamento da interface)
+  "workbench.editor.labelFormat": "short",
+  "workbench.activityBar.location": "hidden",
+  "workbench.statusBar.visible": true,
+  "workbench.iconTheme": "symbols",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.productIconTheme": "fluent-icons",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.layoutControl.enabled": false,
+  "workbench.preferredDarkColorTheme": "Bearded Themanopia (Experimental)",
+  "window.commandCenter": false,
+  "window.autoDetectColorScheme": true,
+  "breadcrumbs.enabled": false,
+  // Editor (Configurações de fonte, cursor e comportamento de edição)
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 16,
+  "editor.lineHeight": 1.5,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.rulers": [80, 120],
+  "editor.renderLineHighlight": "gutter",
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.vertical": "hidden",
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.bracketPairColorization.enabled": false,
+  "editor.stickyScroll.enabled": false,
+  "editor.parameterHints.enabled": false,
+  "editor.suggestSelection": "first",
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.accessibilitySupport": "off",
+  "editor.semanticHighlighting.enabled": false,
+  "editor.multiCursorLimit": 50000,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.tokenColorCustomizations": {
+    "textMateRules": []
+  },
+  // Explorer & Files (Gerenciador de arquivos e associações)
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.sortOrder": "foldersNestsFiles",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": ".eslint*, eslint.config.*, prettier*, tsconfig*, vite*, pnpm-*, bun.lockb, nest*, package-lock*",
+    "tailwind.config.*": "tailwind.config*, postcss.config*",
+    ".env.local": ".env*",
+    ".env": ".env*"
+  },
+  "files.associations": {
+    ".env.*": "dotenv",
+    ".prettierrc": "json",
+    "*.css": "postcss",
+    ".dev.vars": "dotenv",
+    "*.ndjson": "jsonl"
+  },
+  "files.exclude": {
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/.git": true,
+    ".vscode": true
+    // "node_modules": true
+  },
+  // Terminal (Configurações do terminal integrado)
+  "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  // Git & GitLens
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "always",
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.advanced.messages": {
+    "suppressIntegrationDisconnectedTooManyFailedRequestsWarning": true,
+    "suppressIntegrationRequestTimedOutWarning": true
+  },
+  // Language Specific (JavaScript, TypeScript, Emmet)
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.tsserver.log": "off",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "mdx": "javascriptreact"
+  },
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx",
+    "mdx": "jsx"
+  },
+  // Extensions (ESLint, Symbols)
+  "extensions.ignoreRecommendations": true,
+  "eslint.validate": ["javascript", "javascriptreact", "graphql"],
+  "symbols.hidesExplorerArrows": false,
+  "symbols.files.associations": {
+    "*.module.ts": "nest",
+    "*.controller.ts": "nest-controller",
+    "*.service.ts": "nest-service",
+    "*.guard.ts": "typescript",
+    "*.spec.ts": "ts-test",
+    "*.e2e-spec.ts": "ts-test",
+    "*.mock.ts": "ts-test",
+    "vitest.config.e2e.ts": "vite",
+    ".env.development.local": "gear",
+    ".env.test.local": "gear",
+    ".env.local": "gear",
+    ".env.sst": "gear",
+    ".env.example": "gear",
+    "*.ndjson": "brackets-orange"
+  },
+  // Security & Update
+  "security.workspace.trust.untrustedFiles": "newWindow",
+  "security.promptForLocalFileProtocolHandling": false,
+  "update.mode": "start",
+  "update.showReleaseNotes": false,
+  // Language-Specific Overrides (Formatadores)
+  "[prisma]": {
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemaDownload.enable": true
+}
 ```
 
 ## 📝 License
