@@ -195,7 +195,6 @@ curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
   "workbench.productIconTheme": "fluent-icons",
   "workbench.editor.empty.hint": "hidden",
   "workbench.layoutControl.enabled": false,
-  "workbench.preferredDarkColorTheme": "Bearded Themanopia (Experimental)",
   "window.commandCenter": false,
   "window.autoDetectColorScheme": true,
   "breadcrumbs.enabled": false,
@@ -206,7 +205,10 @@ curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
   "editor.lineHeight": 1.5,
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "editor.rulers": [80, 120],
+  "editor.rulers": [
+    80,
+    120
+  ],
   "editor.renderLineHighlight": "gutter",
   "editor.minimap.enabled": false,
   "editor.scrollbar.vertical": "hidden",
@@ -230,13 +232,7 @@ curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.sortOrder": "foldersNestsFiles",
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.patterns": {
-    "package.json": ".eslint*, eslint.config.*, prettier*, tsconfig*, vite*, pnpm-*, bun.lockb, nest*, package-lock*",
-    "tailwind.config.*": "tailwind.config*, postcss.config*",
-    ".env.local": ".env*",
-    ".env": ".env*"
-  },
+  "explorer.fileNesting.enabled": false,
   "files.associations": {
     ".env.*": "dotenv",
     ".prettierrc": "json",
@@ -288,7 +284,11 @@ curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
   },
   // Extensions (ESLint, Symbols)
   "extensions.ignoreRecommendations": true,
-  "eslint.validate": ["javascript", "javascriptreact", "graphql"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "graphql"
+  ],
   "symbols.hidesExplorerArrows": false,
   "symbols.files.associations": {
     "*.module.ts": "nest",
@@ -309,7 +309,6 @@ curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
   // Security & Update
   "security.workspace.trust.untrustedFiles": "newWindow",
   "security.promptForLocalFileProtocolHandling": false,
-  "update.mode": "start",
   "update.showReleaseNotes": false,
   // Language-Specific Overrides (Formatadores)
   "[prisma]": {
@@ -327,7 +326,14 @@ curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "json.schemaDownload.enable": true
+  "json.schemaDownload.enable": true,
+  "remote.SSH.remotePlatform": {
+    "192.168.0.161": "linux",
+    "homelab@192.168.0.161": "linux"
+  },
+  "redhat.telemetry.enabled": true,
+  "git.autofetch": true,
+  "workbench.preferredDarkColorTheme": "Catppuccin Frappé",
 }
 ```
 
